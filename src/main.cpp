@@ -3,6 +3,7 @@
 #include <ctime>
 #include <unordered_map>
 #include <locale.h>
+#include <climits>
 
 using namespace std;
 
@@ -35,7 +36,7 @@ int main() {
 
 	setlocale(LC_ALL, "");
 	estadoOut.open(ESTADOS_FILE, std::ofstream::out | std::ofstream::trunc);
-	cout << "	MONTÍCULO DE FIBONACCI\n\n";
+	cout << "	MONTï¿½CULO DE FIBONACCI\n\n";
 	do {
 		mont = menuMf() - 1;
 		if (mont >= 0)
@@ -44,36 +45,36 @@ int main() {
 				switch (op) {
 				case 1:
 					if (mf[mont].top() == NULL)
-						cout << "Montículo vacío.\n\n";
+						cout << "Montï¿½culo vacï¿½o.\n\n";
 					else
-						cout << "Cima de Montículo_" << mont + 1 << ": " << mf[mont].top() << ".\n\n";
+						cout << "Cima de Montï¿½culo_" << mont + 1 << ": " << mf[mont].top() << ".\n\n";
 					break;
 				case 2:
 					cout << "Elemento a insertar: ";
 					cin >> elem;
 					if (nodos[0].count(elem) || nodos[1].count(elem)) {
-						cout << "Para asegurar la integridad de la aplicación, no se permiten elementos repetidos, "
-							 << "ni siquiera entre distintos montículos (aunque internamente los montículos sí lo permitan).\n\n";
+						cout << "Para asegurar la integridad de la aplicaciï¿½n, no se permiten elementos repetidos, "
+							 << "ni siquiera entre distintos montï¿½culos (aunque internamente los montï¿½culos sï¿½ lo permitan).\n\n";
 						break;
 					}
 					nodos[mont][elem] = mf[mont].insert(elem);
-					cout << "Se ha insertado el número " << elem << "\n\n";
+					cout << "Se ha insertado el nï¿½mero " << elem << "\n\n";
 					break;
 				case 3:
 					mf[mont] = mf[mont].unionFib(mf[(mont + 1) % 2]);
 					nodos[mont].insert(nodos[(mont + 1) % 2].begin(), nodos[(mont + 1) % 2].end());
 					nodos[(mont + 1) % 2].clear();
-					cout << "Se han transferido todos los elementos de Montículo_" << (mont + 1) % 2 + 1 << " a Montículo_" << mont + 1 << ".\n\n";
+					cout << "Se han transferido todos los elementos de Montï¿½culo_" << (mont + 1) % 2 + 1 << " a Montï¿½culo_" << mont + 1 << ".\n\n";
 					break;
 				case 4:
 					nodos[mont].erase(mf[mont].top());
-					cout << "Se ha eliminado el número " << mf[mont].borraTop() << ".\n\n";
+					cout << "Se ha eliminado el nï¿½mero " << mf[mont].borraTop() << ".\n\n";
 					break;
 				case 5:
 					cout << "Elemento a decrecer: ";
 					cin >> elem;
 					if (!nodos[mont].count(elem)) {
-						cout << "Elemento no existente en Montículo_ " << mont + 1 << ".\n\n";
+						cout << "Elemento no existente en Montï¿½culo_ " << mont + 1 << ".\n\n";
 						break;
 					}
 					cout << "Nuevo valor: ";
@@ -83,23 +84,23 @@ int main() {
 						break;
 					}
 					if (nodos[0].count(nuevo) || nodos[1].count(nuevo)) {
-						cout << "Para asegurar la integridad de la aplicación, no se permiten elementos repetidos, "
-							 << "ni siquiera entre distintos montículos (aunque internamente los montículos sí lo permitan).\n\n";
+						cout << "Para asegurar la integridad de la aplicaciï¿½n, no se permiten elementos repetidos, "
+							 << "ni siquiera entre distintos montï¿½culos (aunque internamente los montï¿½culos sï¿½ lo permitan).\n\n";
 						break;
 					}
 					mf[mont].decreceClave(nodos[mont][elem], nuevo);
 					nodos[mont][nuevo] = nodos[mont][elem];
 					nodos[mont].erase(elem);
-					cout << "Se ha cambiado el número " << elem << " por " << nuevo << ".\n\n";
+					cout << "Se ha cambiado el nï¿½mero " << elem << " por " << nuevo << ".\n\n";
 					break;
 				case 6:
-					cout << "Montículo_ " << mont + 1 << " en forma de lista de nodos con las listas de sus hijos:\n"
+					cout << "Montï¿½culo_ " << mont + 1 << " en forma de lista de nodos con las listas de sus hijos:\n"
 						 << mf[mont].show() << "\n\n";
 					break;
 				case 7:
 					med = menuMed() -1;
 					if (med < 0) break;
-					cout << "Midiendo operación, puede tardar unos segundos...\n";
+					cout << "Midiendo operaciï¿½n, puede tardar unos segundos...\n";
 					out.open(files[med], std::ofstream::out | std::ofstream::trunc); 
 					medidas[med](out); 
 					out.close();
@@ -123,14 +124,14 @@ int main() {
 }
 
 int menuMf() {
-	cout << "Elija un montículo a utilizar (ambos son montículos de mínimos para números enteros):\n"
-		 << "	1.- Montículo_1\n"
-		 << "	2.- Montículo_2\n"
+	cout << "Elija un montï¿½culo a utilizar (ambos son montï¿½culos de mï¿½nimos para nï¿½meros enteros):\n"
+		 << "	1.- Montï¿½culo_1\n"
+		 << "	2.- Montï¿½culo_2\n"
 		 << "	0.- Salir\n";
 	int op;
 	cin >> op;
 	while (op < 0 || op > 2) {
-		cout << "Opción no válida.\nElija un montículo:";
+		cout << "Opciï¿½n no vï¿½lida.\nElija un montï¿½culo:";
 		cin >> op;
 	}
 	return op;
@@ -140,18 +141,18 @@ int menuOp() {
 	cout << "Operaciones:\n"
 		 << "	1.- Mostrar top\n"
 		 << "	2.- Insertar\n"
-		 << "	3.- Unión con el otro montículo\n"
+		 << "	3.- Uniï¿½n con el otro montï¿½culo\n"
 		 << "	4.- Borrar top\n"
 		 << "	5.- Decrecer clave\n"
-		 << "	6.- Mostrar montículo\n"
+		 << "	6.- Mostrar montï¿½culo\n"
 		 << "	7.- Tomar medidas de tiempos\n"
 		 << "	8.- Guardar estado\n"
 		 << "	0.- Volver\n";
 	int op;
-	cout << "Elija una opción:";
+	cout << "Elija una opciï¿½n:";
 	cin >> op;
 	while (op < 0 || op > 8) {
-		cout << "Opción no válida.\nElija una opción:";
+		cout << "Opciï¿½n no vï¿½lida.\nElija una opciï¿½n:";
 		cin >> op;
 	}
 	return op;
@@ -160,16 +161,16 @@ int menuOp() {
 int menuMed() {
 	cout << "Operaciones:\n"
 		 << "	1.- Top\n"
-		 << "	2.- Inserción\n"
-		 << "	3.- Unión\n"
+		 << "	2.- Inserciï¿½n\n"
+		 << "	3.- Uniï¿½n\n"
 		 << "	4.- BorraTop\n"
 		 << "	5.- DecreceClave\n"
 		 << "	0.- Volver\n";
 	int op;
-	cout << "Elija una operación a medir:";
+	cout << "Elija una operaciï¿½n a medir:";
 	cin >> op;
 	while (op < 0 || op > 5) {
-		cout << "Opción no válida.\nElija una operación:";
+		cout << "Opciï¿½n no vï¿½lida.\nElija una operaciï¿½n:";
 		cin >> op;
 	}
 	return op;
