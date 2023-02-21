@@ -44,7 +44,7 @@ int main() {
 				op = menuOp();
 				switch (op) {
 				case 1:
-					if (mf[mont].top() == NULL)
+					if (mf[mont].empty())
 						cout << "Mont�culo vac�o.\n\n";
 					else
 						cout << "Cima de Mont�culo_" << mont + 1 << ": " << mf[mont].top() << ".\n\n";

@@ -14,5 +14,5 @@ $(TARGET):
 .PHONY: clean
 
 clean:
-	-rm $(TARGET) $(SRC:%.c=%.o)
+	-rm $(TARGET)
 

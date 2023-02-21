@@ -159,9 +159,14 @@ void montFib<T, Comparator>::clearRecursion(pNodo nodo)
 // - - - - - - - - - - - - - - OPERACIONES PRINCIPALES - - - - - - - - - - - - - - //
 
 template<typename T, class Comparator>
+bool montFib<T, Comparator>::empty() const {
+	return _top == nullptr;
+}
+
+template<typename T, class Comparator>
 T montFib<T, Comparator>::top() const
 {
-	return _top != nullptr ? _top->key : NULL;
+	return _top != nullptr ? _top->key : T();
 }
 
 template<typename T, class Comparator>

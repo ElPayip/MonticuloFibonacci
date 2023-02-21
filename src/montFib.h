@@ -7,8 +7,8 @@ using namespace std;
 template <typename T, class Comparator = less<T>>
 class montFib {
 public:
-	/*Unidad mínima que conforma el montículo de fibonacci. Contiene el elemento (clave) que lo representa, 
-	así como el valor de su marca (si ha perdido un hijo o no), su grado (núm de hijos) y punteros a los 
+	/*Unidad mï¿½nima que conforma el montï¿½culo de fibonacci. Contiene el elemento (clave) que lo representa, 
+	asï¿½ como el valor de su marca (si ha perdido un hijo o no), su grado (nï¿½m de hijos) y punteros a los 
 	nodos padre, hijo, izquierdo y derecho.*/
 	struct Nodo {
 	private:
@@ -27,83 +27,86 @@ public:
 private:
 	// ATRIBUTOS:
 
-	// Puntero el elemento en la cima del montículo (equivalente a min en un montículo de mínimos).
+	// Puntero el elemento en la cima del montï¿½culo (equivalente a min en un montï¿½culo de mï¿½nimos).
 	pNodo _top;
-	// Número de elementos del montículo.
+	// Nï¿½mero de elementos del montï¿½culo.
 	size_t _n;
-	// Criterio de comparación del montículo (por defecto es less<T>, para un montículo de mínimos).
+	// Criterio de comparaciï¿½n del montï¿½culo (por defecto es less<T>, para un montï¿½culo de mï¿½nimos).
 	Comparator _cmp;
 
 	// FUNCIONES AUXILIARES:
 
-	/*Devuelve el máximo grado posible de un árbol en el montículo, utilizado para tamaño que deberá 
+	/*Devuelve el mï¿½ximo grado posible de un ï¿½rbol en el montï¿½culo, utilizado para tamaï¿½o que deberï¿½ 
 	tener el vector de grados en consolidar().*/
 	int maxGrado() const { return size_t(log2(_n)) + 1; }
 
-	/*Concatena el nodo 'nuevo' junto al nodo 'viejo' en la lista de raíces del montículo, colocándolo entre este último y 
-	el nodo que había a su izquierda.*/
+	/*Concatena el nodo 'nuevo' junto al nodo 'viejo' en la lista de raï¿½ces del montï¿½culo, colocï¿½ndolo entre este ï¿½ltimo y 
+	el nodo que habï¿½a a su izquierda.*/
 	pNodo concatenar(pNodo viejo, pNodo nuevo);
 
-	/*Concatena el nodo 'nuevo' junto al nodo en la cima, colocándolo entre este último y el nodo que había a su izquierda.
+	/*Concatena el nodo 'nuevo' junto al nodo en la cima, colocï¿½ndolo entre este ï¿½ltimo y el nodo que habï¿½a a su izquierda.
 	Si el nuevo nodo tiene mayor prioridad, se convierte en la nueva cima.*/
 	pNodo concatenar(pNodo nuevo);
 
-	/*Combina los árboles (nodos) en la lista de raíces del montículo de dos en dos, de forma que 
-	no haya dos árboles con el mismo grado en la lista final.*/
+	/*Combina los ï¿½rboles (nodos) en la lista de raï¿½ces del montï¿½culo de dos en dos, de forma que 
+	no haya dos ï¿½rboles con el mismo grado en la lista final.*/
 	void consolidar();
 
-	/*Añade el nodo 'hijo' a la lista de hijos del nodo 'padre', y devuelve la raíz del árbol resultante.*/
+	/*Aï¿½ade el nodo 'hijo' a la lista de hijos del nodo 'padre', y devuelve la raï¿½z del ï¿½rbol resultante.*/
 	pNodo hacerHijo(pNodo hijo, pNodo padre);
 
-	/*Combina los nodos recibidos como parámetros en un único árbol, utilizando como padre aquel con mayor
-	prioridad. El árbol resultante estará ubicado en la posición del nodo 'n1', independientemente de cuál
-	sea el padre, y se devolverá un puntero a su raíz.*/
+	/*Combina los nodos recibidos como parï¿½metros en un ï¿½nico ï¿½rbol, utilizando como padre aquel con mayor
+	prioridad. El ï¿½rbol resultante estarï¿½ ubicado en la posiciï¿½n del nodo 'n1', independientemente de cuï¿½l
+	sea el padre, y se devolverï¿½ un puntero a su raï¿½z.*/
 	pNodo linkNodos(pNodo n1, pNodo n2);
 
-	/*Intercambia las posiciones de dos nodos en la lista de raíces del montículo. De este modo, los punteros
-	dados como parámetros apuntarán a los mismos nodos, en posiciones distintas.*/
+	/*Intercambia las posiciones de dos nodos en la lista de raï¿½ces del montï¿½culo. De este modo, los punteros
+	dados como parï¿½metros apuntarï¿½n a los mismos nodos, en posiciones distintas.*/
 	void swapNodos(pNodo& n1, pNodo& n2);
 
-	/*Extrae un nodo de la lista en la que se encontraba (ya sea la de raíces o la de hijos de otro nodo),
-	junto con sus hijos, y devuelve un puntero a él.*/
+	/*Extrae un nodo de la lista en la que se encontraba (ya sea la de raï¿½ces o la de hijos de otro nodo),
+	junto con sus hijos, y devuelve un puntero a ï¿½l.*/
 	pNodo corte(pNodo nodo);
 
 	/*Marca y decrece el grado del nodo 'padre', cuyo hijo ha sido previamente cortado. En caso de estar ya
 	marcado, se corta, desmarca y se propaga el corte al que era su padre.*/
 	void propagaCorte(pNodo padre);
 
-	/*Forma recursivamente la representación de nodos y listas de nodos utilizada en la operación show().*/
+	/*Forma recursivamente la representaciï¿½n de nodos y listas de nodos utilizada en la operaciï¿½n show().*/
 	string showRecursion(pNodo ptr);
 
-	/*Libera la memoria dinámica de cada nodo, y se llama recursivamente para sus hijos*/
+	/*Libera la memoria dinï¿½mica de cada nodo, y se llama recursivamente para sus hijos*/
 	void clearRecursion(pNodo nodo);
 
 public:
 	// OPERACIONES PRINCIPALES:
 
-	/*Inicializa la cima del montículo a nullptr y el número de elementos a 0.*/
+	/*Inicializa la cima del montï¿½culo a nullptr y el nï¿½mero de elementos a 0.*/
 	montFib() : _top(nullptr), _n(0), _cmp() {}
 
-	/*Devuelve el elemento en la cima del montículo*/
+	/*Comprueba si el montÃ­culo estÃ¡ vacÃ­o*/
+	bool empty() const;
+
+	/*Devuelve el elemento en la cima del montï¿½culo*/
 	T top() const;
 
-	/*Concatena las listas de raíces de ambos montículos, dejando el mf pasado como parámetro vacío.*/
+	/*Concatena las listas de raï¿½ces de ambos montï¿½culos, dejando el mf pasado como parï¿½metro vacï¿½o.*/
 	montFib unionFib(montFib& mf);
 
-	/*Añade un nuevo nodo con el elemento dado en la lista de raíces del montículo, devolviendo un puntero a dicho nodo.*/
+	/*Aï¿½ade un nuevo nodo con el elemento dado en la lista de raï¿½ces del montï¿½culo, devolviendo un puntero a dicho nodo.*/
 	pNodo insert(T const& elem);
 
-	/*Elimina el nodo en la cima del montículo, organizando los nodos restantes mediante la función auxiliar consolidar().*/
+	/*Elimina el nodo en la cima del montï¿½culo, organizando los nodos restantes mediante la funciï¿½n auxiliar consolidar().*/
 	T borraTop();
 
-	/*Cambia el valor de la clave a uno con mayor prioridad dado (si no lo es lanza una excepción), llevando su nodo a la
-	lista de raíces en caso de volverse más prioritario que su nodo padre. En el proceso, marca y corta los nodos superiores
-	según la función auxiliar propagaCorte().*/
+	/*Cambia el valor de la clave a uno con mayor prioridad dado (si no lo es lanza una excepciï¿½n), llevando su nodo a la
+	lista de raï¿½ces en caso de volverse mï¿½s prioritario que su nodo padre. En el proceso, marca y corta los nodos superiores
+	segï¿½n la funciï¿½n auxiliar propagaCorte().*/
 	pNodo decreceClave(pNodo nodo, T const& key);
 
-	/*Proporciona una representación visual recursiva del montículo en forma de lista de nodos con las listas de sus hijos.*/
+	/*Proporciona una representaciï¿½n visual recursiva del montï¿½culo en forma de lista de nodos con las listas de sus hijos.*/
 	string show();
 
-	/*Libera toda la memoria dinámica del montículo llamando a clearRecursion() desde _top*/
+	/*Libera toda la memoria dinï¿½mica del montï¿½culo llamando a clearRecursion() desde _top*/
 	void clear();
 };
